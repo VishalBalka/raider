@@ -1,0 +1,31 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Set up Docker
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build Backend Docker Image
+        working-directory: ./backend
+        run: docker build -t backend-app .
+
+      - name: Build Frontend Docker Image
+        working-directory: ./frontend
+        run: docker build -t frontend-app .
+
+      - name: Trigger Backend Deploy on Render
+        run: curl "$RENDER_BACKEND_DEPLOY_HOOK"
+
+      - name: Trigger Frontend Deploy on Render
+        run: curl "$RENDER_FRONTEND_DEPLOY_HOOK"
