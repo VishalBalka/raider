@@ -1,0 +1,111 @@
+.auth-wrapper {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  background: linear-gradient(120deg, #007bff, #00c6ff);
+  padding-top: 2rem;
+}
+
+.auth-card {
+  background: #fff;
+  width: 90%;
+  max-width: 420px;
+  padding: 24px;
+  border-radius: 14px;
+  box-shadow: 0 8px 28px rgba(0,0,0,.15);
+  animation: fadeIn .6s ease;
+  text-align: center;
+}
+
+.brand-title {
+  margin: 0;
+  font-size: 22px;
+  font-weight: bold;
+  color: #007bff;
+}
+
+.brand-sub {
+  font-size: 12px;
+  margin-bottom: 16px;
+  opacity: 0.8;
+}
+
+.auth-error {
+  background: #ffdddd;
+  color: #b30000;
+  padding: 8px;
+  margin-bottom: 10px;
+  border-radius: 6px;
+}
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  font-size: 15px;
+}
+
+.password-box {
+  position: relative;
+}
+.toggle-pass {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  cursor: pointer;
+}
+
+.role-toggle {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+.role-toggle button {
+  flex: 1;
+  padding: 10px;
+  border-radius: 8px;
+  background: #eee;
+  border: none;
+  cursor: pointer;
+}
+.role-toggle .active {
+  background: #007bff;
+  color: #fff;
+}
+
+.submit-btn {
+  background: #007bff;
+  color: #fff;
+  padding: 12px;
+  font-size: 16px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+}
+.submit-btn:hover {
+  background: #0056d8;
+}
+
+.switch-text {
+  margin-top: 12px;
+  font-size: 14px;
+}
+.switch-link {
+  background: none;
+  border: none;
+  color: #007bff;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(18px); }
+  to { opacity: 1; transform: translateY(0); }
+}

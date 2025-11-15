@@ -1,0 +1,23 @@
+:root {
+  --bg: #f5f7fa;
+  --text: #111;
+  --card: #fff;
+  --shadow: rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="dark"] {
+  --bg: #10171e;
+  --text: #f1f1f1;
+  --card: #1d2733;
+  --shadow: rgba(255, 255, 255, 0.05);
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+}
+
+.card, .trip-card {
+  background: var(--card);
+  box-shadow: 0 4px 12px var(--shadow);
+}
