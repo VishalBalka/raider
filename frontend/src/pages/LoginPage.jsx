@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { apiRequest } from "../api.js";
+import AuthLayout from "../components/AuthLayout.jsx";
 
 export default function LoginPage({ onSuccess, switchToRegister }) {
   const [form, setForm] = useState({ email: "", password: "" });
@@ -17,33 +18,39 @@ export default function LoginPage({ onSuccess, switchToRegister }) {
   }
 
   return (
-    <div style={{ maxWidth: 400, margin: "2rem auto" }}>
-      <h3>Login</h3>
-      <form onSubmit={handleSubmit}>
-        <input
-          placeholder="Email"
-          type="email"
-          value={form.email}
-          onChange={(e) => setForm({ ...form, email: e.target.value })}
-          required
-          style={{ display: "block", marginBottom: 8, width: "100%" }}
-        />
-        <input
-          placeholder="Password"
-          type="password"
-          value={form.password}
-          onChange={(e) => setForm({ ...form, password: e.target.value })}
-          required
-          style={{ display: "block", marginBottom: 8, width: "100%" }}
-        />
-        {error && (
-          <p style={{ color: "red", marginBottom: 8 }}>{error}</p>
-        )}
-        <button type="submit">Login</button>
+    <AuthLayout
+      title="Welcome Back"
+      subtitle="Match rides based on same destination"
+      switchText="No account?"
+      switchAction={switchToRegister}
+      switchLabel="Register"
+    >
+      {error && <div className="auth-error">{error}</div>}
+      <form onSubmit={handleSubmit} className="auth-form">
+        <div className="input-box">
+          <input
+            type="email"
+            placeholder="Email"
+            required
+            onChange={(e) => setForm({ ...form, email: e.target.value })}
+          />
+          <span className="input-icon">📧</span>
+        </div>
+
+        <div className="input-box">
+          <input
+            type="password"
+            placeholder="Password"
+            required
+            onChange={(e) => setForm({ ...form, password: e.target.value })}
+          />
+          <span className="input-icon">🔐</span>
+        </div>
+
+        <button className="submit-btn" type="submit">
+          Login
+        </button>
       </form>
-      <p style={{ marginTop: 12 }}>
-        No account? <button onClick={switchToRegister}>Register</button>
-      </p>
-    </div>
+    </AuthLayout>
   );
 }

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { apiRequest } from "../api.js";
+import AuthLayout from "../components/AuthLayout.jsx";
 
 export default function RegisterPage({ onSuccess, switchToLogin }) {
   const [form, setForm] = useState({
@@ -22,49 +23,66 @@ export default function RegisterPage({ onSuccess, switchToLogin }) {
   }
 
   return (
-    <div style={{ maxWidth: 400, margin: "2rem auto" }}>
-      <h3>Create account</h3>
-      <form onSubmit={handleSubmit}>
-        <input
-          placeholder="Name"
-          value={form.name}
-          onChange={(e) => setForm({ ...form, name: e.target.value })}
-          required
-          style={{ display: "block", marginBottom: 8, width: "100%" }}
-        />
-        <input
-          placeholder="Email"
-          type="email"
-          value={form.email}
-          onChange={(e) => setForm({ ...form, email: e.target.value })}
-          required
-          style={{ display: "block", marginBottom: 8, width: "100%" }}
-        />
-        <input
-          placeholder="Password"
-          type="password"
-          value={form.password}
-          onChange={(e) => setForm({ ...form, password: e.target.value })}
-          required
-          style={{ display: "block", marginBottom: 8, width: "100%" }}
-        />
-        <select
-          value={form.role}
-          onChange={(e) => setForm({ ...form, role: e.target.value })}
-          style={{ display: "block", marginBottom: 8, width: "100%" }}
-        >
-          <option value="driver">Driver</option>
-          <option value="rider">Rider</option>
-        </select>
-        {error && (
-          <p style={{ color: "red", marginBottom: 8 }}>{error}</p>
-        )}
-        <button type="submit">Register</button>
+    <AuthLayout
+      title="Create Account"
+      subtitle="Share rides only when going same way"
+      switchText="Already registered?"
+      switchAction={switchToLogin}
+      switchLabel="Login"
+    >
+      {error && <div className="auth-error">{error}</div>}
+      <form onSubmit={handleSubmit} className="auth-form">
+
+        <div className="input-box">
+          <input
+            placeholder="Full Name"
+            onChange={(e) => setForm({ ...form, name: e.target.value })}
+            required
+          />
+          <span className="input-icon">👤</span>
+        </div>
+
+        <div className="input-box">
+          <input
+            type="email"
+            placeholder="Email"
+            onChange={(e) => setForm({ ...form, email: e.target.value })}
+            required
+          />
+          <span className="input-icon">📧</span>
+        </div>
+
+        <div className="input-box">
+          <input
+            type="password"
+            placeholder="Password"
+            onChange={(e) => setForm({ ...form, password: e.target.value })}
+            required
+          />
+          <span className="input-icon">🔐</span>
+        </div>
+
+        <div className="role-toggle">
+          <button
+            type="button"
+            className={form.role === "driver" ? "active" : ""}
+            onClick={() => setForm({ ...form, role: "driver" })}
+          >
+            🚘 Driver
+          </button>
+          <button
+            type="button"
+            className={form.role === "rider" ? "active" : ""}
+            onClick={() => setForm({ ...form, role: "rider" })}
+          >
+            🧑‍💼 Rider
+          </button>
+        </div>
+
+        <button className="submit-btn" type="submit">
+          Register
+        </button>
       </form>
-      <p style={{ marginTop: 12 }}>
-        Already have an account?{" "}
-        <button onClick={switchToLogin}>Login</button>
-      </p>
-    </div>
+    </AuthLayout>
   );
 }

@@ -17,6 +17,12 @@ db.serialize(() => {
       email TEXT UNIQUE NOT NULL,
       password_hash TEXT NOT NULL,
       role TEXT CHECK(role IN ('driver','rider')) NOT NULL,
+      mobile TEXT,
+      avatar_path TEXT,
+      location_name TEXT,
+      location_lat REAL,
+      location_lng REAL,
+      profile_completed INTEGER DEFAULT 0,
       created_at DATETIME DEFAULT CURRENT_TIMESTAMP
     );
   `);

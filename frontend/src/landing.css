@@ -1,0 +1,123 @@
+.landing-container {
+  height: 100vh;
+  width: 100%;
+  background: linear-gradient(135deg, #0a85ff, #00dbde);
+  display: flex;
+  flex-direction: column;
+  color: white;
+  animation: fadeIn 1.1s ease;
+}
+
+/* Top Navbar */
+.top-nav {
+  padding: 18px 35px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.brand-name {
+  font-size: 22px;
+  font-weight: bold;
+  letter-spacing: 0.5px;
+}
+
+.nav-btn {
+  background: transparent;
+  border: 2px solid #fff;
+  padding: 8px 18px;
+  border-radius: 8px;
+  margin-left: 10px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.3s;
+}
+.nav-btn:hover {
+  background: #fff;
+  color: #0a85ff;
+}
+
+/* Center Content */
+.landing-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 0 20px;
+}
+
+.landing-title {
+  font-size: 48px;
+  font-weight: 900;
+  margin-bottom: 10px;
+}
+.landing-title span {
+  color: #ffee00;
+}
+
+.landing-subtitle {
+  font-size: 18px;
+  opacity: 0.9;
+  margin-bottom: 25px;
+}
+
+.cta-buttons {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.primary-btn,
+.outline-btn {
+  border: none;
+  padding: 14px 36px;
+  font-size: 17px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.3s;
+  font-weight: bold;
+}
+
+.primary-btn {
+  background: #fff;
+  color: #0a85ff;
+}
+.primary-btn:hover {
+  transform: scale(1.05);
+}
+
+.outline-btn {
+  background: transparent;
+  border: 2px solid #fff;
+}
+.outline-btn:hover {
+  background: #fff;
+  color: #0a85ff;
+}
+
+/* Footer */
+.footer {
+  padding: 12px;
+  text-align: center;
+  font-size: 14px;
+  opacity: 0.8;
+}
+
+/* Animation */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(25px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .landing-title {
+    font-size: 32px;
+  }
+  .landing-subtitle {
+    font-size: 15px;
+  }
+}

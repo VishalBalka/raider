@@ -3,14 +3,17 @@ import LoginPage from "./pages/LoginPage.jsx";
 import RegisterPage from "./pages/RegisterPage.jsx";
 import DriverDashboard from "./pages/DriverDashboard.jsx";
 import RiderDashboard from "./pages/RiderDashboard.jsx";
+import LandingPage from "./pages/LandingPage.jsx";
 import { getToken, setToken } from "./api.js";
+import "./styles.css";
 
 export default function App() {
   const [user, setUser] = useState(() => {
     const stored = localStorage.getItem("user");
     return stored ? JSON.parse(stored) : null;
   });
-  const [view, setView] = useState(user ? "dashboard" : "login");
+
+  const [view, setView] = useState(user ? "dashboard" : "landing");
 
   function handleAuthSuccess({ user, token }) {
     setUser(user);
@@ -23,48 +26,29 @@ export default function App() {
     setUser(null);
     localStorage.removeItem("user");
     setToken(null);
-    setView("login");
+    setView("landing");
   }
 
   if (!user) {
-    if (view === "register") {
-      return (
-        <RegisterPage
-          onSuccess={handleAuthSuccess}
-          switchToLogin={() => setView("login")}
-        />
-      );
+    if (view === "login") {
+      return <LoginPage onSuccess={handleAuthSuccess} switchToRegister={() => setView("register")} />;
     }
-    return (
-      <LoginPage
-        onSuccess={handleAuthSuccess}
-        switchToRegister={() => setView("register")}
-      />
-    );
+    if (view === "register") {
+      return <RegisterPage onSuccess={handleAuthSuccess} switchToLogin={() => setView("login")} />;
+    }
+    return <LandingPage onLogin={() => setView("login")} onRegister={() => setView("register")} />;
   }
 
   return (
-    <div style={{ padding: "1rem", fontFamily: "sans-serif" }}>
-      <header
-        style={{
-          display: "flex",
-          justifyContent: "space-between",
-          marginBottom: "1rem",
-        }}
-      >
+    <div className="app-container">
+      <header className="app-header">
         <h2>Same Destination Rides</h2>
         <div>
-          <span style={{ marginRight: "1rem" }}>
-            {user.name} ({user.role})
-          </span>
+          <span style={{ marginRight: "1rem" }}>{user.name} ({user.role})</span>
           <button onClick={logout}>Logout</button>
         </div>
       </header>
-      {user.role === "driver" ? (
-        <DriverDashboard />
-      ) : (
-        <RiderDashboard />
-      )}
+      {user.role === "driver" ? <DriverDashboard /> : <RiderDashboard />}
     </div>
   );
 }
